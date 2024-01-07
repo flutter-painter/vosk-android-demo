@@ -19,8 +19,11 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import org.vosk.LibVosk;
@@ -55,18 +58,45 @@ public class VoskActivity extends Activity implements
     private SpeechService speechService;
     private SpeechStreamService speechStreamService;
     private TextView resultView;
+    private Translator translator;
 
+    EditText editText;
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
         setContentView(R.layout.main);
+        translator = new Translator(getApplicationContext());
+        translator.load();
 
         // Setup layout
         resultView = findViewById(R.id.result_text);
         setUiState(STATE_START);
 
+        Button translateButton = (Button) findViewById(R.id.translate);
+        editText = (EditText) findViewById(R.id.simpleEditText);
+
+
+        translateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String text = editText.getText().toString();
+
+                if (text != null)//check whether the entered text is not null
+                    System.out.println("text is ");
+                System.out.println(text);
+                final String translated = translator.run(text);
+                System.out.println("translated text is ");
+                System.out.println(translated);
+                {
+                    Toast.makeText(getApplicationContext(), translated, Toast.LENGTH_LONG).show();//display the translated text entered in the edit text
+                }
+            }
+        });
+
+
         findViewById(R.id.recognize_file).setOnClickListener(view -> recognizeFile());
         findViewById(R.id.recognize_mic).setOnClickListener(view -> recognizeMicrophone());
+
         ((ToggleButton) findViewById(R.id.pause)).setOnCheckedChangeListener((view, isChecked) -> pause(isChecked));
 
         LibVosk.setLogLevel(LogLevel.INFO);

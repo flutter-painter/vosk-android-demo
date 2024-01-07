@@ -4,6 +4,19 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:padding="16dp">
+    <EditText
+        android:id="@+id/simpleEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="220dp"
+        android:layout_centerInParent="true"
+        android:text="Text" /><!--set text in edit text-->
+
+    <Button
+        android:id="@+id/translate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/translate"/>
+
     <Button
         android:id="@+id/recognize_file"
         android:layout_width="match_parent"
@@ -30,5 +43,18 @@
         android:gravity="bottom"
         android:scrollbars="vertical"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/title_translation"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:scrollbars="vertical"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/translationBelow"/>
+
+
+
+
 
 </LinearLayout>
