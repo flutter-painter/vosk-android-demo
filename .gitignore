@@ -8,3 +8,4 @@
 *.md5
 *.lst
 *.iml
+app/src/main/assets/opennmt.tflite
