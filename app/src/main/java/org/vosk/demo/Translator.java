@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -153,7 +154,16 @@ public class Translator {
         for(String word : words){
             Integer id = vocabSource.get(word);
 //Use Unknown ID if ID retrieved was null
-            id = id == null ? unknownId : id;
+
+            if(id == null) {
+                String wordLowC = word.toLowerCase(Locale.ROOT);
+                id = vocabSource.get(word.toLowerCase(Locale.ROOT));
+                if(id == null) {
+                id = unknownId ;
+                }
+            }
+
+
             System.out.println("added id is");
             System.out.println(id);
             idsList.add(id);
